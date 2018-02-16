@@ -3,11 +3,61 @@
   <head>
     <title>RBlog</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <%= yield %>
+    <header>
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <%= link_to "rBlog", root_path, class:"navbar-brand" %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <%= link_to "Home", root_path, class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "About", about_path, class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Contact", contact_path, class:"nav-link" %>
+            </li>
+          </ul>
+          <form class="form-inline mt-2 mt-md-0 search-form">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+    <section>
+      <div class="container">
+        <div class="row">
+          <!-- Alarms and Warning -->
+          <% if flash[:notice] %>
+            <div class="alert alert-success"><%= flash[:notice] %></div>
+          <% end %>
+
+          <% if flash[:alert] %>
+            <div class="alert alert-danger"><%= flash[:alert] %></div>
+          <% end %>
+          <%= yield %>
+          <div class="col-md-4">
+            <%= render 'partials/sidebar' %>
+          </div>
+        </div>
+      </div>
+    </section>
+    <%= render 'partials/footer' %>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+
   </body>
 </html>
