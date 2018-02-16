@@ -18,13 +18,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="<%= params[:controller] == 'admin/posts' ? 'active' : '' %>">
               <%= link_to "Posts",admin_posts_path,class:"nav-link" %>
             </li>
-            <li class="nav-item">
+            <li class="<%= params[:controller] == 'admin/categories' ? 'active' : '' %>">
               <%= link_to "Categories",admin_categories_path,class:"nav-link" %>
             </li>
-            <li class="nav-item">
+            <li class="<%= params[:controller] == 'admin/users' ? 'active' : '' %>">
               <%= link_to "Users",admin_users_path,class:"nav-link" %>
             </li>
           </ul>
@@ -39,7 +39,17 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <%= yield %>
+            <div class="well">
+              <!-- Alarms and Warning -->
+              <% if flash[:notice] %>
+                <div class="alert alert-success"><%= flash[:notice] %></div>
+              <% end %>
+
+              <% if flash[:alert] %>
+                <div class="alert alert-danger"><%= flash[:alert] %></div>
+              <% end %>
+              <%= yield %>
+            </div>
           </div>
         </div>
       </div>
