@@ -1,2 +1,28 @@
-<h1>Admin::Users#index</h1>
-<p>Find me in app/views/admin/users/index.html.erb</p>
+<div class="col-md-12">
+  <div class="well">
+    <h2 class="page-header">Manage Users <%= link_to "New User", new_admin_user_path, class:"btn btn-success" %> </h2>
+    <%if @users.exists? %>
+      <table class="table table-striped">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Created At</th>
+          <th>Actions</th>
+        </tr>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.created_at.to_time.strftime('%B %e at %l:%M %p') %></td>
+            <td>
+              <%= link_to "Edit", edit_admin_user_path(user.id), class:"btn btn-primary" %>
+              <%= link_to "Delete", admin_user_path(user), method: :delete, data: {confirm: 'Are you sure?'}, class:"btn btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      No users yet.
+    <% end %>
+  </div>
+</div>

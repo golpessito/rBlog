@@ -1,25 +1,26 @@
 <div class="well">
-  <h2 class="page-header">Manage Posts <a href="new.html" class="btn btn-success">New Post</a></h2>
-  <table class="table table-striped">
-    <tr>
-      <th>Post Title</th>
-      <th>Post Category</th>
-      <th>Actions</th>
-    </tr>
-    <tr>
-      <td>Post One</td>
-      <td>News</td>
-      <td><a class="btn btn-primary">Edit</a> <a class="btn btn-danger">Delete</a></td>
-    </tr>
-    <tr>
-      <td>Post One</td>
-      <td>News</td>
-      <td><a class="btn btn-primary">Edit</a> <a class="btn btn-danger">Delete</a></td>
-    </tr>
-    <tr>
-      <td>Post One</td>
-      <td>News</td>
-      <td><a class="btn btn-primary">Edit</a> <a class="btn btn-danger">Delete</a></td>
-    </tr>
-  </table>
+  <h2 class="page-header">Manage Posts <%= link_to "New Post", new_admin_post_path, class:"btn btn-success" %></h2>
+  <% if @posts.exists? %>
+    <table class="table table-striped">
+      <tr>
+        <th>Post Title</th>
+        <th>Post Category</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+      <% @posts.each do |post| %>
+        <tr>
+          <td><%= post.title %></td>
+          <td><%= post.category.name %></td>
+          <td><%= post.created_at.to_time.strftime('%B %e at %l:%M %p') %></td>
+          <td>
+            <%= link_to "Edit", edit_admin_post_path(post.id), class:"btn btn-primary" %>
+            <%= link_to "Delete", admin_post_path(post.id), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    No post yet.
+  <% end %>
 </div>
