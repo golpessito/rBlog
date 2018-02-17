@@ -8,6 +8,10 @@ class User < ApplicationRecord
   validates :password, presence: true
   validates :password, confirmation:true
 
+  def self.search(query)
+    where("name like ? OR email like ?", "%#{query}%","%#{query}%")
+  end
+
   def self.authentication(email,password)
     user=User.find_by_email(email)
     if user && user_password_hash == BCrypt::Engine.hash_secret(password,user.password_salt)

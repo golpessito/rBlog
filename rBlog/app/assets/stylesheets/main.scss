@@ -42,14 +42,14 @@ body
 
 .search-form input[type='text']{
   border-radius: 0;
-  margin-top:0;
+  margin-top:5px;
   height:38px;
 }
 
 .search-form .btn {
   border:0;
   height:38px;
-  margin-top:9px;
+  margin-top:0px;
   border-radius:0;
   margin-left:-8px;
 }
@@ -57,6 +57,11 @@ body
 .search-form .form-control{
   background:#f4f4f4;
   border:1px solid #eee;
+}
+
+.search-form .form-group{
+  display:inline-block;
+  margin-bottom: 20px;
 }
 
 .btn{
