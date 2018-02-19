@@ -1,3 +1,8 @@
+<script>
+  $(function() {
+    $('textarea#froala-editor').froalaEditor()
+  });
+</script>
 <h1>Edit Post</h1>
 <%= form_for [:admin, @post] do |f| %>
   <!-- Check for errors -->
@@ -25,14 +30,17 @@
   <div class="form-group">
     <%= f.label :image %>
     <%= f.file_field :image %>
-  </div>
+  </div><br>
+  <% if @post.image.exists? %>
+    <%= image_tag @post.image, width:"100%" %>
+  <% end %><br><br>
   <div class="form-group">
     <%= f.label :tags %>
     <%= f.text_area :tags, class:"form-control"%>
   </div>
   <div class="form-group">
     <%= f.label :body %>
-    <%= f.text_area :body, class:"form-control"%>
+    <%= f.text_area :body, class:"form-control",id:"froala-editor"%>
   </div><br>
   <%= f.submit "Submit", class:"btn btn-primary" %>
   <%= link_to "Cancel", admin_posts_path, class:"btn btn-default" %>

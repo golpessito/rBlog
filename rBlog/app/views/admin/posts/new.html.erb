@@ -1,3 +1,8 @@
+<script>
+  $(function() {
+    $('textarea#froala-editor').froalaEditor()
+  });
+</script>
 <h1>New Post</h1>
 <%= form_for [:admin, @post] do |f| %>
   <!-- Check for errors -->
@@ -28,7 +33,7 @@
   </div>
   <div class="form-group">
     <%= f.label :tags %>
-    <%= f.text_area :tags, class:"form-control"%>
+    <%= f.text_area :tags, class:"form-control", id:"froala-editor" %>
   </div>
   <div class="form-group">
     <%= f.label :body %>
