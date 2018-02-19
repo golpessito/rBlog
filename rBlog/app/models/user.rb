@@ -12,9 +12,9 @@ class User < ApplicationRecord
     where("name like ? OR email like ?", "%#{query}%","%#{query}%")
   end
 
-  def self.authentication(email,password)
+  def self.authenticate(email,password)
     user=User.find_by_email(email)
-    if user && user_password_hash == BCrypt::Engine.hash_secret(password,user.password_salt)
+    if user && user.password_hash == BCrypt::Engine.hash_secret(password,user.password_salt)
       user
     else
       nil
