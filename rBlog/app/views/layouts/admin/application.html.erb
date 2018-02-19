@@ -31,23 +31,22 @@
         </div>
       </nav>
     </header>
+    <div class="user_nav float-right">
+      <% if current_user %>
+        Logged as <%= current_user.email %> <%= link_to "log out", admin_logout_path %>
+      <% else %>
+        <%= link_to "log in", admin_login_path %>
+      <% end %>
+    </div>
     <section>
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <div class="well">
-              <div class="user_nav float-right">
-                <% if current_user %>
-                  Logged as <%= current_user.email %>
-                <% else %>
-                  <%= link_to "log in", admin_logout_path %>
-                <% end %>
-              </div>
               <!-- Alarms and Warning -->
               <% if flash[:notice] %>
                 <div class="alert alert-success"><%= flash[:notice] %></div>
               <% end %>
-
               <% if flash[:alert] %>
                 <div class="alert alert-danger"><%= flash[:alert] %></div>
               <% end %>

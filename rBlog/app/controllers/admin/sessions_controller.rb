@@ -1,6 +1,7 @@
 class Admin::SessionsController < Admin::ApplicationController
   layout 'admin/login'
 
+
   def new
   end
 
@@ -14,4 +15,11 @@ class Admin::SessionsController < Admin::ApplicationController
        render 'new'
     end
   end
+
+  def destroy
+    session[:user_id]=nil
+
+    redirect_to admin_login_path, notice: "Logged out"
+  end
+
 end
