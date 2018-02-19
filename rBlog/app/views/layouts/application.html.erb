@@ -26,25 +26,24 @@
               <%= link_to "Contact", contact_path, class:"nav-link" %>
             </li>
           </ul>
-          <form class="form-inline mt-2 mt-md-0 search-form">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
-          </form>
+          <%= render 'partials/search' %>
         </div>
       </nav>
     </header>
     <section>
       <div class="container">
-        <div class="row">
-          <!-- Alarms and Warning -->
-          <% if flash[:notice] %>
-            <div class="alert alert-success"><%= flash[:notice] %></div>
-          <% end %>
+        <!-- Alarms and Warning -->
+        <% if flash[:notice] %>
+          <div class="alert alert-success"><%= flash[:notice] %></div>
+        <% end %>
 
-          <% if flash[:alert] %>
-            <div class="alert alert-danger"><%= flash[:alert] %></div>
-          <% end %>
-          <%= yield %>
+        <% if flash[:alert] %>
+          <div class="alert alert-danger"><%= flash[:alert] %></div>
+        <% end %>
+        <div class="row">
+          <div class="col-md-8">
+            <%= yield %>
+          </div>
           <div class="col-md-4">
             <%= render 'partials/sidebar' %>
           </div>

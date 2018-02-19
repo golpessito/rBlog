@@ -1,50 +1,25 @@
-<div class="col-md-8">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="post">
-        <img src="#">
-        <div class="post-content">
-          <h3>Lorem Ipsum</h3>
-          <small>Posted by Brad on October 24 2014</small>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut urna a nisi pretium egestas. Proin vel ultrices arcu. Aliquam erat volutpat. Aenean tristique quam tellus, egestas gravida sem fermentum eget. Proin sit amet velit eu ipsum vestibulum vulputate non ut ante. Sed laoreet est ac nisi malesuada, id cursus metus tristique.</p>
-          <a class="btn btn-primary btn-block">Read More</a>
+<div id="posts-index">
+  <% if @posts.exists? %>
+    <% @posts.each_slice(2) do |post| %>
+      <div class="row">
+      <% post.each do |post| %>
+        <div class="col-md-6">
+          <div class="post">
+            <%= image_tag post.image, width:'100%' %>
+            <div class="post-content">
+              <h3><%= post.title %></h3>
+              <small>Posted by <%= post.user.name %> on <%= post.created_at.to_time.strftime('%B %e at %l:%M %p') %>
+              </small>
+              <%= raw post.body.truncate(200) %>
+              <%= link_to "Read More", post_path(post), class:"btn btn-primary" %>
+            </div>
+          </div>
         </div>
+      <% end %>
       </div>
-    </div>
-    <div class="col-md-6">
-      <div class="post">
-        <img src="#">
-        <div class="post-content">
-          <h3>Lorem Ipsum</h3>
-          <small>Posted by Brad on October 24 2014</small>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut urna a nisi pretium egestas. Proin vel ultrices arcu. Aliquam erat volutpat. Aenean tristique quam tellus, egestas gravida sem fermentum eget. Proin sit amet velit eu ipsum vestibulum vulputate non ut ante. Sed laoreet est ac nisi malesuada, id cursus metus tristique.</p>
-          <a class="btn btn-primary btn-block">Read More</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="post">
-        <img src="#">
-        <div class="post-content">
-          <h3>Lorem Ipsum</h3>
-          <small>Posted by Brad on October 24 2014</small>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut urna a nisi pretium egestas. Proin vel ultrices arcu. Aliquam erat volutpat. Aenean tristique quam tellus, egestas gravida sem fermentum eget. Proin sit amet velit eu ipsum vestibulum vulputate non ut ante. Sed laoreet est ac nisi malesuada, id cursus metus tristique.</p>
-          <a class="btn btn-primary btn-block">Read More</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="post">
-        <img src="#">
-        <div class="post-content">
-          <h3>Lorem Ipsum</h3>
-          <small>Posted by Brad on October 24 2014</small>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut urna a nisi pretium egestas. Proin vel ultrices arcu. Aliquam erat volutpat. Aenean tristique quam tellus, egestas gravida sem fermentum eget. Proin sit amet velit eu ipsum vestibulum vulputate non ut ante. Sed laoreet est ac nisi malesuada, id cursus metus tristique.</p>
-          <a class="btn btn-primary btn-block">Read More</a>
-        </div>
-      </div>
-    </div>
-  </div>
+      <%= will_paginate @posts %>
+    <% end %>
+  <% else %>
+  <p>No posts yet</p>
+  <% end %>
 </div>
